@@ -1,0 +1,25 @@
+nav {
+  /* border: 1px solid red; */
+  background-color: darkblue;
+  color: lightcyan;
+  padding: 0px 5px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  text-shadow: 2px 2px 5px rgb(0, 0, 0);
+}
+nav .nav-right {
+  display: flex;
+  justify-content: flex-start;
+  /* border: 1px solid red; */
+}
+nav .nav-left {
+  display: flex;
+  justify-content: flex-start;
+  /* border: 1px solid red; */
+}
+nav a, nav div {
+  color:unset;
+  text-decoration: none;
+  padding: 0px 5px;
+}
