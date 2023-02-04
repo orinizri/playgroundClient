@@ -1,10 +1,11 @@
 <div class="login">
-    <form>
+    <form [formGroup]="credentials" (ngSubmit)="ConfigService.login(credentials)">
         <label for="login-username">username</label>
-        <input type="text" id="login-username" />
+        <input formControlName="username" type="text" id="login-username" />
         <label for="login-password">password</label>
-        <input type="text" id="login-password" />
+        <input formControlName="password" type="text" id="login-password" />
         <button type="submit">login</button>
     </form>
-
+    <div *ngIf="ConfigService.errorMessage">{{ConfigService.errorMessage}}</div>
+    <div *ngIf="ConfigService.access_token"> Logged in successfully </div>
 </div>
