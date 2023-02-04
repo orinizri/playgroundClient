@@ -6,6 +6,6 @@
         <input formControlName="password" type="text" id="login-password" />
         <button type="submit">login</button>
     </form>
-    <div *ngIf="ConfigService.errorMessage">{{ConfigService.errorMessage}}</div>
-    <div *ngIf="ConfigService.access_token"> Logged in successfully </div>
+    <div *ngIf="ConfigService.errorMessage" class="error message">{{ConfigService.errorMessage}}</div>
+    <div *ngIf="ConfigService.access_token" class="success message">Logged in successfully</div>
 </div>
