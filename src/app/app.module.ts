@@ -10,6 +10,9 @@ import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfigComponent } from './config/config.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GameComponent } from './components/game/game.component';
+import { LobbyComponent } from './components/lobby/lobby.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,9 @@ import { ConfigComponent } from './config/config.component';
     LoginComponent,
     SignupComponent,
     ProfileComponent,
-    ConfigComponent
+    ConfigComponent,
+    GameComponent,
+    LobbyComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +35,8 @@ import { ConfigComponent } from './config/config.component';
       {path: 'login', component: LoginComponent},
       {path: 'signup', component: SignupComponent},
       {path: 'profile', component: ProfileComponent},
-    ]),  ],
+    ]),
+    BrowserAnimationsModule,  ],
   providers: [],
   bootstrap: [AppComponent]
 })
