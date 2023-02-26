@@ -4,9 +4,13 @@
     </div>
     <div class="nav-left">
         <a routerLink="">Home</a>
-        <a routerLink="signup">Sign up</a>
-        <a routerLink="login">Log in</a>
-        <a routerLink="profile">Profile</a>
-        <a routerLink="">Log out</a>
+        <ng-container *ngIf="!this.ConfigService.signedIn">
+            <a routerLink="signup">Sign up</a>
+            <a routerLink="login">Log in</a>
+        </ng-container>
+        <ng-container *ngIf="this.ConfigService.signedIn">
+            <a routerLink="profile">Profile</a>
+            <a routerLink="">Log out</a>
+        </ng-container>
     </div>
 </nav>

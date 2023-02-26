@@ -17,7 +17,8 @@ export class ConfigService {
   constructor(private http: HttpClient) { }
   access_token = '';
   errorMessage = '';
-  profileDetails = {}
+  profileDetails = {};
+  signedIn = false;
 
 
 
@@ -29,6 +30,7 @@ export class ConfigService {
     }, httpOptions).subscribe({
       next: data => {
         this.access_token = data.access_token
+        this.signedIn = true;
       },
       error: error => {
         this.errorMessage = error.message;
