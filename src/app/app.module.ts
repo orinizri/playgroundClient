@@ -1,4 +1,3 @@
-import { WebSocketService } from './web-socket.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -42,7 +41,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
       { path: 'profile', component: ProfileComponent },
     ]),
     BrowserAnimationsModule,],
-  providers: [WebSocketService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
