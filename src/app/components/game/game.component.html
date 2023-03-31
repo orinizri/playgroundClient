@@ -1,39 +1,31 @@
+<!-- <div *ngFor="let action of ActionList">
+    <li>
+        {{action}}
+    </li>
+  </div>
+  
+  <input
+    [(ngModel)]="newAction"
+    (keyup)="$event.keyCode == 13 && sendAction()"
+  />
+  <button (click)="sendAction()">Send Action</button> -->
 <div class="game">
     <div>
         <button (click)="startGame()">Start Game</button>
     </div>
     <div class="role">
         <form>
-            <button (click)="onSubmit('operative')">Operative</button>
-            <button (click)="onSubmit('spymaster')">Spymaster</button>
+            <button (click)="getPlayers('operative')">Operative</button>
+            <button (click)="getPlayers('spymaster')">Spymaster</button>
         </form>
     </div>
     <div class="flex-container">
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
-        <div class="word">test</div>
+        <div *ngFor="let card of this.numbers; let i = index"
+        class="word"
+        [attr.data-index]="i"
+        >
+            <div (click)="onClick('choose', i)">{{i}}</div>
+        </div>
     </div>
     <button class="nextGame" (click)="nextGame()">Next game</button>
 </div>
