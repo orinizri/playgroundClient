@@ -9,28 +9,31 @@ import { io } from "socket.io-client";
 })
 export class EventsService {
   constructor(
-    private socket:Socket
+    private socket: Socket
     ) {}
-  activeUsers$ = this.socket.fromEvent<any>('players');
-  public message$: BehaviorSubject<string> = new BehaviorSubject('');
+  players$ = this.socket.fromEvent<any>('players');
+  public playerOneTurn$ : BehaviorSubject<boolean> = new BehaviorSubject(true);;
+  public action$: BehaviorSubject<string> = new BehaviorSubject('');
 
-  public sendAction(message: any) {
-    console.log('events sendMessage: ', message)
-    this.socket.emit('events', message);
+  public sendAction(action: any) {
+    console.log('actions sendAction event service: ', action)
+    this.socket.emit('actions', action);
+    this.playerOneTurn$.next(!this.playerOneTurn$)
+    console.log("this.playerOneTurn$", this.playerOneTurn$)
   }
 
-  public getPlayers(message: any) {
-    console.log('players getPlayers: ', message)
-    
-    this.socket.emit('players', message);
+
+  public initializePlayers() {
+    this.socket.emit('players', { playerId: this.socket.ioSocket.id });
+    return this.players$;
   }
 
   public getNewAction = () => {
-    this.socket.on('events', (message: any) =>{
-      console.log("events getNewMessage", message)
-      this.message$.next(message);
+    this.socket.on('actions', (action: any, playerOneTurn: boolean) =>{
+      console.log("front events getNewAction", action, playerOneTurn)
+      this.action$.next(action);
     });
-    return this.message$.asObservable();
+    return this.action$.asObservable();
   }
 
   

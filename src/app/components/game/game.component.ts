@@ -11,35 +11,57 @@ export class GameComponent {
   role=''
   ActionList: string[] = [];
   numbers = new Array(20)
-
+  playerOne = '';
+  playerTwo = '';
+  playerOneTurn = true;
+  question =''
   constructor(private eventsService: EventsService){}
 
   ngOnInit(){
-    this.eventsService.getNewAction().subscribe((action: string) => {
-      this.ActionList.push(action);
+    // this.eventsService.getNewAction().subscribe((action: string) => {
+    //   console.log("ng init action", action)
+    //   this.ActionList.push(action);
+    // })
+    this.eventsService.initializePlayers().subscribe((players: any) => {
+      if (!this.playerOne && players?.playerOne) this.playerOne = players.playerOne;
+      if (!this.playerTwo && players?.playerTwo) this.playerTwo = players.playerTwo;
     })
   }
 
-  onClick(action: string, id: number) {
-    console.log("action: ", action)
-    console.log("id: ", id)
-    this.eventsService.sendAction({action, id});
+  submitQuestion(event: any) {
+    console.log("event~ ", event)
+    console.log("question", this.question)
+    // validate playing user
+    // take player input 
   }
+  onClick(action: string, cardId: number, event: any) {
+    if ((event.target.parentElement.parentElement.classList[1].split('-')[1] === 'one' &&
+      !this.playerOneTurn) || (event.target.parentElement.parentElement.classList[1].split('-')[1] === 'two' &&
+      this.playerOneTurn) 
+    ) return;
 
-  onSubmit(role: string){
-    this.role = role;
-    console.log("role",this.role)
+    this.eventsService.sendAction({ action, cardId, playerOneTurn: this.playerOneTurn });
+    this.playerOneTurn = !this.playerOneTurn;
   }
 
   nextGame() {
     
   }
 
-  getPlayers(id : string) {
-    this.eventsService.getPlayers(id) // .subscribe(() => {});
+  initializePlayers() {
+    this.eventsService.initializePlayers().subscribe((users) => {
+      if (!this.playerOne && users.playerOne) 
+        this.playerOne = users.playerOne
+      if (!this.playerTwo && users.playerTwo) 
+        this.playerTwo = users.playerTwo
+
+      
+    });
   }
-
+  
   startGame() {
-
+    this.eventsService.getNewAction().subscribe((actions) => {
+      console.log("gameComp startGame", actions)
+    });
   }
 }

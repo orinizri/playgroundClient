@@ -23,3 +23,44 @@
     text-align: center;
     margin: 10px;
 }
+
+form {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+}
+.players {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: row;
+}
+form button {
+    margin: 0.3rem;
+}
+.question {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    font-weight: 700;
+}
+.question label,
+.question input {
+    margin: 0.1rem;
+}
+
+.boards-container {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: row;
+}
+
+.flex-container.player-one {
+    border: 1px solid red;
+}
+
+.flex-container.player-two {
+    border: 1px solid blue;
+}

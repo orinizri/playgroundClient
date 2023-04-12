@@ -15,16 +15,36 @@
     </div>
     <div class="role">
         <form>
-            <button (click)="getPlayers('operative')">Operative</button>
-            <button (click)="getPlayers('spymaster')">Spymaster</button>
+            <div class="playerTurn">
+                Player turn: {{ playerOneTurn ? 'player one' : 'player two'}}
+            </div>
+            <div class="players">
+                <button [disabled]="playerOne" (click)="initializePlayers()">Operative</button>
+                <button [disabled]="playerTwo" (click)="initializePlayers()">Spymaster</button>
+            </div>
+            <div class="question" *ngIf="playerOne && playerTwo">
+                <label>Ask your question:</label>
+                <input type="text" [(ngModel)]="question" name="question"/>
+                <button type="submit" (click)="submitQuestion($event)">Ask</button>
+            </div>
         </form>
     </div>
-    <div class="flex-container">
-        <div *ngFor="let card of this.numbers; let i = index"
-        class="word"
-        [attr.data-index]="i"
-        >
-            <div (click)="onClick('choose', i)">{{i}}</div>
+    <div class="boards-container">
+        <div class="flex-container player-one">
+            <div *ngFor="let card of this.numbers; let i = index"
+            class="word"
+            [attr.data-index]="i"
+            >
+                <div (click)="onClick('choose', i, $event)">{{i}}</div>
+            </div>
+        </div>
+        <div class="flex-container player-two">
+            <div *ngFor="let card of this.numbers; let i = index"
+            class="word"
+            [attr.data-index]="i"
+            >
+                <div (click)="onClick('choose', i, $event)">{{i}}</div>
+            </div>
         </div>
     </div>
     <button class="nextGame" (click)="nextGame()">Next game</button>
